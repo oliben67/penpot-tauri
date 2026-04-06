@@ -1,6 +1,8 @@
-# penpot-electron-app
+# penpot-tauri
 
-An [Electron](https://www.electronjs.org/) wrapper for [Penpot](https://penpot.app) that targets a **local self-hosted instance** instead of the cloud service.
+> **Branched from [vikdevelop/penpot-electron](https://github.com/vikdevelop/penpot-electron)** — rewritten as a [Tauri](https://tauri.app) app.
+
+A [Tauri](https://tauri.app) wrapper for [Penpot](https://penpot.app) that targets a **local self-hosted instance** instead of the cloud service.
 
 ![Screenshot](https://github.com/vikdevelop/penpot/blob/main/screnshots/penpot_home.png)
 
@@ -8,43 +10,48 @@ An [Electron](https://www.electronjs.org/) wrapper for [Penpot](https://penpot.a
 
 | Component | Source | Branch/Path |
 |-----------|--------|--------------|
-| Electron app (`src/`, `package.json`) | [vikdevelop/penpot-electron](https://github.com/vikdevelop/penpot-electron) | `main` |
+| Tauri app (`src-tauri/`, `package.json`) | Branched from [vikdevelop/penpot-electron](https://github.com/vikdevelop/penpot-electron) | `main` |
 | Docker Compose stack (`docker-compose.yml`) | [penpot/penpot](https://github.com/penpot/penpot) | `main` › `docker/images/docker-compose.yaml` |
 
 The `docker-compose.yml` in this repository carries its full upstream git history
 (46 commits) imported from `penpot/penpot` via an orphan-branch merge, so
 `git log -- docker-compose.yml` traces every change back to the source.
 
-## Local instance quick-start
+## Prerequisites
 
-Requires: `docker`, `node` (≥ 16), `npm`, `nc` (netcat).
+- `docker`
+- [Rust](https://rustup.rs/) (stable toolchain)
+- System dependencies for Tauri (on Debian/Ubuntu):
+  ```bash
+  sudo apt install libwebkit2gtk-4.1-dev build-essential curl wget file \
+    libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+  ```
+
+## Local instance quick-start
 
 ```bash
 # clone and run in one step
-git clone git@github.com:oliben67/penpot-electron-app.git
-cd penpot-electron-app
+git clone git@github.com:oliben67/penpot-tauri.git
+cd penpot-tauri
 bash start.sh
 ```
 
 The script will:
 1. Start the full Penpot stack via `docker compose`
 2. Wait for the frontend to be reachable on `localhost:9001`
-3. Install npm dependencies
-4. Launch the Electron window pointing at `http://localhost:9001`
+3. Build and launch the Tauri window pointing at `http://localhost:9001`
 
 To use a different URL or port:
 ```bash
 PENPOT_URL=http://localhost:9002 bash start.sh
 ```
 
-## Flatpak installation (original upstream method)
+## Development
 
-For the original cloud-hosted build via Flatpak:
 ```bash
-wget -qO /tmp/build.sh https://raw.githubusercontent.com/vikdevelop/penpot-electron/main/build.sh && sh /tmp/build.sh
-```
+# Run in dev mode (hot-reload for Rust changes)
+PENPOT_URL=http://localhost:9001 cargo tauri dev
 
-Dependencies:
-```bash
-flatpak install -y org.electronjs.Electron2.BaseApp org.freedesktop.Sdk org.freedesktop.Sdk.Extension.node16
+# Build a release binary
+cargo tauri build
 ```

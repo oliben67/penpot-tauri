@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-    <id>com.github.vikdevelop.penpot-tauri</id>
-    <launchable type="desktop-id">com.github.vikdevelop.penpot-tauri.desktop</launchable>
+    <id>com.github.oliben67.penpot-tauri</id>
+    <launchable type="desktop-id">com.github.oliben67.penpot-tauri.desktop</launchable>
     <name>Penpot</name>
     <summary>Open-source prototyping and design platform</summary>
     <metadata_license>CC0-1.0</metadata_license>
