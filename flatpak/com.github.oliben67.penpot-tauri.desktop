@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=Penpot
-Icon=com.github.oliben67.penpot-tauri_i
-Exec=penpot-tauri.sh
-Categories=Internet
+Comment=Open-source prototyping and design platform
+Icon=com.github.oliben67.penpot-tauri
+Exec=penpot-tauri
+Categories=Graphics;Development;
 Type=Application
+Terminal=false
+StartupWMClass=penpot

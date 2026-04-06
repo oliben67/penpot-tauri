@@ -1,45 +1,34 @@
 app-id: com.github.oliben67.penpot-tauri
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-base: org.electronjs.Electron2.BaseApp
-base-version: "21.08"
-command: penpot-tauri.sh
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.node16
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: penpot-tauri
 finish-args:
   - --share=ipc
   - --socket=x11
+  - --socket=wayland
   - --share=network
   - --filesystem=xdg-download
   - --device=dri
 build-options:
-  append-path: /usr/lib/sdk/node16/bin
+  append-path: /usr/lib/sdk/rust-stable/bin
   env:
-    NPM_CONFIG_LOGLEVEL: info
+    CARGO_HOME: /run/build/penpot-tauri/cargo
 modules:
-  - name: penpot
+  - name: penpot-tauri
     buildsystem: simple
     build-options:
-        env:
-          XDG_CACHE_HOME: /run/build/penpot-tauri/flatpak-node/cache
-        build-args:
-        - --share=network
+      env:
+        CARGO_HOME: /run/build/penpot-tauri/cargo
     build-commands:
-    - yarn
-    - mkdir penpot
-    - yarn electron-packager ./ penpot --platform=linux --arch=x64 --electron-version=15.4.1 --out=penpot/
-    - mkdir /app/main
-    - cp -R penpot/penpot-linux-x64/* /app/main
-    - install -D -t /app/bin penpot-tauri.sh
-    - install -D -t /app/share/applications flatpak/com.github.oliben67.penpot-tauri.desktop
-    - install -D -t /app/share/metainfo flatpak/com.github.oliben67.penpot-tauri.metainfo.xml
-    - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/icons/com.github.oliben67.penpot-tauri_i.png
+      - cd src && cargo tauri build --bundles none
+      - install -Dm755 src/target/release/penpot /app/bin/penpot-tauri
+      - install -Dm644 flatpak/com.github.oliben67.penpot-tauri.desktop /app/share/applications/com.github.oliben67.penpot-tauri.desktop
+      - install -Dm644 flatpak/com.github.oliben67.penpot-tauri.metainfo.xml /app/share/metainfo/com.github.oliben67.penpot-tauri.metainfo.xml
+      - install -Dm644 flatpak/icons/com.github.oliben67.penpot-tauri.png /app/share/icons/hicolor/128x128/apps/com.github.oliben67.penpot-tauri.png
     sources:
       - type: archive
-        url: https://github.com/oliben67/penpot-tauri/archive/refs/tags/0.2.3.tar.gz
-        sha256: d7f03976aaf84ae92683ed98e48eb05dbe1787f5bfd35241f302db52973096a2
-      - type: script
-        dest-filename: penpot-tauri.sh
-        commands:
-          - zypak-wrapper.sh /app/main/penpot "$@"
+        url: https://github.com/oliben67/penpot-tauri/archive/refs/tags/v1.0.0.tar.gz
+        sha256: FIXME
