@@ -6,6 +6,9 @@
     <summary>Open-source prototyping and design platform</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>MIT</project_license>
+    <developer id="com.github.oliben67">
+        <name>Olivier Steck</name>
+    </developer>
 
     <description>
         <p>Penpot is the first open-source design and prototyping platform meant for cross-domain teams. It works with open web standards (SVG) and is a great alternative to Figma.</p>
@@ -43,7 +46,7 @@
 
     <categories>
         <category>Graphics</category>
-        <category>Development</category>
+        <category>VectorGraphics</category>
     </categories>
 
     <releases>

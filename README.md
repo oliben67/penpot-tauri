@@ -8,10 +8,10 @@ A [Tauri](https://tauri.app) wrapper for [Penpot](https://penpot.app) that targe
 
 ## Source repositories
 
-| Component | Source | Branch/Path |
-|-----------|--------|--------------|
-| Tauri app (`src-tauri/`, `package.json`) | Branched from [vikdevelop/penpot-electron](https://github.com/vikdevelop/penpot-electron) | `main` |
-| Docker Compose stack (`docker-compose.yml`) | [penpot/penpot](https://github.com/penpot/penpot) | `main` › `docker/images/docker-compose.yaml` |
+| Component                                     | Source                                                                                | Branch/Path                                       |
+| --------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Tauri app (`src/`, `package.json`)  |  [oliben67/penpot-tauri](https:github.com/oliben67/penpot-tauri) (branched from [vikdevelop/penpot-electron](https://github.com/vikdevelop/penpot-electron)) | `main`                                          |
+| Docker Compose stack (`docker-compose.yml`) | [penpot/penpot](https://github.com/penpot/penpot)                                        | `main` › `docker/images/docker-compose.yaml` |
 
 The `docker-compose.yml` in this repository carries its full upstream git history
 (46 commits) imported from `penpot/penpot` via an orphan-branch merge, so
@@ -37,11 +37,13 @@ bash start.sh
 ```
 
 The script will:
+
 1. Start the full Penpot stack via `docker compose`
 2. Wait for the frontend to be reachable on `localhost:9001`
 3. Build and launch the Tauri window pointing at `http://localhost:9001`
 
 To use a different URL or port:
+
 ```bash
 PENPOT_URL=http://localhost:9002 bash start.sh
 ```
@@ -55,3 +57,4 @@ PENPOT_URL=http://localhost:9001 cargo tauri dev
 # Build a release binary
 cargo tauri build
 ```
+
