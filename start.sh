@@ -27,8 +27,6 @@ echo ""
 # Give the backend a couple more seconds to finish initialising after the port opens
 sleep 3
 
-echo "==> Installing npm dependencies (if needed)..."
-npm install --prefix "$SCRIPT_DIR" --silent
-
-echo "==> Launching penpot-electron -> $PENPOT_URL"
-PENPOT_URL="$PENPOT_URL" npm start --prefix "$SCRIPT_DIR"
+echo "==> Launching penpot (Tauri) -> $PENPOT_URL"
+cd "$SCRIPT_DIR"
+PENPOT_URL="$PENPOT_URL" cargo tauri dev

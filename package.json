@@ -7,7 +7,7 @@
     "start": "electron .",
     "start:local": "PENPOT_URL=http://localhost:9001 electron ."
   },
-  "repository": "https://github.com/vikdevelop/penpot",
+  "repository": "https://github.com/oliben67/penpot-tauri",
   "keywords": [
     "Electron",
     "quick",
@@ -15,7 +15,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "vikdevelop",
+  "author": "Olivier Steck <osteck@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "electron": "^15.4.1",
